@@ -22,3 +22,6 @@ fonts_project
 * `synth_perm_biannual.R` - runs the synthetic control with the Synth package to create a nice figure
 * `functions_conformal_012` - inference methods from ["An Exact and Robust Conformal Inference Method for Counterfactual and Synthetic Controls"]: https://arxiv.org/abs/1712.09089. The replication code is saved here [source]: https://drive.google.com/file/d/10xX8cj1HHpTgR9kT3GBljTfhXox0EJ9c/view
 * Running the synthetic control will require R version > 4. I ran the code on ubuntu 18.03. 
+
+
+### Using mean embeddings/modifying the code.
