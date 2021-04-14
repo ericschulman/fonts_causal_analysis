@@ -11,21 +11,9 @@ import time
 import numpy as np
 
 
-def get_avg_embeddings(data_path):
-    
-    embeddings = pd.read_csv(data_path+'embeddings_full.csv')
-    embeddings = embeddings.dropna()
-    test = embeddings[ (embeddings['style']==19) & (embeddings['family']==254)]
-    embeddings[['style','family']] = embeddings[['style','family']] .astype(int)
-    test = embeddings[ (embeddings['style']==19) & (embeddings['family']==254)]
-    embeddings_sty = embeddings.groupby(['style','family']).median()
-    
-    embeddings_sty.to_csv(data_path+"embeddings_avg.csv")
-
-
 def main(data_path):
     ######load data######
-    embeddings = pd.read_csv(data_path+ "embeddings_avg.csv")
+    embeddings = pd.read_csv(data_path+ "embeddings_full.csv")
     families = pd.read_csv(data_path+ "Families.csv")
 
     ## drop a row with nan data.
@@ -67,5 +55,4 @@ def main(data_path):
 
 if __name__ == "__main__":
     data_path = "../datasets/UT research project datasets/"
-    get_avg_embeddings(data_path)
     main(data_path)
