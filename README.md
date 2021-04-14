@@ -13,15 +13,14 @@ fonts_project
 └───fonts_replication
 ```
 
-
-### data cleaning
+### Creating the panel
 * Running `Gravity_Dist.py` creates the gravity distance measure. This file is computationally intesive to run and takes about 24 hours on relatively weak hardware i.e. I5-6260U CPU @ 1.80GHz × 4 and 16 GB RAM. It takes `embeddings_full.csv` as input and returns `embeddings_avg.csv` and `gravity_dist_avg.csv` as outputs.
 * `covariate_construction.py` merges the other relevant data into the synthetic control.
+* The resulting file is called `fonts_panel_biannual_new.csv`.
 
-### estimation
-* `synth_perm_biannual.R` - runs the synthetic control with the Synth package to create a nice figure
+### Estimating the synthetic control
+* `synth_biannual_plots.R` - runs the synthetic control with the Synth package to save .png image in the directory.
+* `synth_biannual_tables.R` - runs the synthetic control with the Synth package to print tables to the R terminal.
 * `functions_conformal_012` - inference methods from ["An Exact and Robust Conformal Inference Method for Counterfactual and Synthetic Controls"]: https://arxiv.org/abs/1712.09089. The replication code is saved here [source]: https://drive.google.com/file/d/10xX8cj1HHpTgR9kT3GBljTfhXox0EJ9c/view
 * Running the synthetic control will require R version > 4. I ran the code on ubuntu 18.03. 
-
-
-### Using mean embeddings/modifying the code.
+* The code is currently written to produce tables for the inverse distance measure. To use the distance from Averia, you can modify lines 60 and 71 with the appropriate variables i.e. change `gravity_dist` and `gravity_var` to `Distance.from.Mean` and `mean_var` from `fonts_panel_biannual_new.csv`.

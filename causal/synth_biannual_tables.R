@@ -28,7 +28,7 @@ source("causal/functions_conformal_012.R")
 ### load the data Data
 fonts_data<- read.csv("../datasets/UT research project datasets/fonts_panel_biannual_new.csv")
 fonts_data$gravity_dist = -1*(log(-1*fonts_data$gravity_dist))
-fontfontid<-9
+fontfontid<-11
 
 #setup control ids, this code is awful...
 controls0<-unique(fonts_data$Foundry.Id)
@@ -57,9 +57,7 @@ for (i in c(1:10)){
   embedding_spec[[length(embedding_spec)+1]] <- list(paste("pca.embedding.",toString(i), "_var",sep=""),seq(2002.0,2014.5,by=.5),c("mean"))
 }
 
-predictors_list <- c("gravity_dist", embedding_pred, "gravity_var", "Glyph.Count","consec", "no_nas")#"new.obs",   ,"no_nas",embedding_var "Surcharge.USD","Order.Count","USD.per.Order",
-#predictors_list <- c("Glyph.Count", "new.obs",embedding_pred)
-
+predictors_list <- c("gravity_dist", embedding_pred, "gravity_var", "Glyph.Count","consec", "no_nas")
 
 #####################################################################################################
 # calculate treatment effects #######################################################################
@@ -70,7 +68,6 @@ calculate_treatment<-function(pre_treatment,post_treatment){
   dataprep.out<-dataprep(foo = fonts_data,
                          predictors = predictors_list,
                          predictors.op = "mean",
-                         #special.predictors = #embedding_spec,
                          dependent = "gravity_dist",
                          unit.variable = "Foundry.Id",
                          time.variable = "year_month",
@@ -84,7 +81,7 @@ calculate_treatment<-function(pre_treatment,post_treatment){
   
   ## choose average v instead of something more sophisticated for now...
   v = 1/length(predictors_list) * rep(1,length(predictors_list))
-  synth.out <- synth(dataprep.out)#,custom.v=v)#
+  synth.out <- synth(dataprep.out,custom.v=v)
   
   
   y1 <- dataprep.out$Y1plot
@@ -100,36 +97,6 @@ calculate_treatment<-function(pre_treatment,post_treatment){
   p_all <- all(y1, y_synth, T0, T1,5000)
   return(list(treatment,p_block,p_all,synth.out,dataprep.out))
 }
-
-#####################################################################
-################## create a plot ####################################
-#####################################################################
-
-# set up relevant years
-pre_treatment <- seq(2002,2014.,by=.5)
-post_treatment <- seq(2014.5,2017.5,by=.5)
-treatment_result <- calculate_treatment(pre_treatment,post_treatment) 
-dataprep.out <- treatment_result[[5]]
-synth.out <- treatment_result[[4]]
-
-print(synth.out$solution.w)
-
-##------------ plot in levels (treated and synthetic) ---------
-png(filename="~/Documents/fonts_replication/plots/synth_plot_inverse50.png")
-path.plot(dataprep.res= dataprep.out, synth.res= synth.out, Xlab="Year", Ylab="Inverse Distance", tr.intake=2014.5,Ylim=c(-10,-9),
-          Legend = c("Treated","Synthetic"))
-dev.off()
-
-
-#create custom plot against average
-average <- (synth.out)
-average$solution.w <- 1/(length(controls_id)) * rep(1, length(controls_id))
-
-png(filename="~/Documents/fonts_replication/plots/avg_plot_inverse50.png")
-path.plot(dataprep.res= dataprep.out, synth.res= average, Xlab="Year", Ylab="Inverse Distance", tr.intake=2014.5,Ylim=c(-10,-9),
-          Legend = c("Treated","Average"))
-dev.off()
-
 
 
 #####################################################################
@@ -191,6 +158,7 @@ for (i in c(1:12)){
 results_info <-array(c(treatments,p_blocks,p_alls),
                      dim= c(length(treatments) ,3))
 
+#actually print results
 print_treat(results_info,c(1,5))
 print_treat(results_info,c(6,10))
 print_treat(results_info,c(11,12))
@@ -233,6 +201,7 @@ for (i in c(1:5)){
 results_info <-array(c(treatments,p_blocks,p_alls),
                      dim= c(length(treatments) ,3))
 
+#actually print results
 print_treat(results_info,c(1,5))
 
 #############################################################
@@ -270,8 +239,9 @@ for (post_treatment in treatment_durations) {
 results_info <-array(c(treatments,p_blocks,p_alls),
                      dim= c(length(treatments) ,3))
 
+#actually print results
 print_treat(results_info,c(1,7))
-#print_treat(results_info,c(8,14))
+print_treat(results_info,c(8,14))
 print_treat(results_info,c(15-7,17-7))
 print_treat(results_info,c(18-7,20-7))
 

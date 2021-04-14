@@ -28,7 +28,7 @@ source("causal/functions_conformal_012.R")
 ### load the data Data
 fonts_data<- read.csv("../datasets/UT research project datasets/fonts_panel_biannual_new.csv")
 fonts_data$gravity_dist = -1*(log(-1*fonts_data$gravity_dist))
-fontfontid<-9
+fontfontid<-11
 
 #setup control ids, this code is awful...
 controls0<-unique(fonts_data$Foundry.Id)
@@ -78,11 +78,7 @@ calculate_treatment<-function(pre_treatment,post_treatment){
                          unit.names.variable = "Foundry.Name",
                          time.plot = relevant_years)
   
-  
-  ## choose average v instead of something more sophisticated for now...
-  v = 1/length(predictors_list) * rep(1,length(predictors_list))
   synth.out <- synth(dataprep.out)
-  
   
   y1 <- dataprep.out$Y1plot
   y_synth <- dataprep.out$Y0plot%*%synth.out$solution.w
@@ -112,8 +108,8 @@ synth.out <- treatment_result[[4]]
 print(synth.out$solution.w)
 
 ##------------ plot in levels (treated and synthetic) ---------
-png(filename="~/Documents/fonts_replication/plots/synth_plot_inverse50.png")
-path.plot(dataprep.res= dataprep.out, synth.res= synth.out, Xlab="Year", Ylab="Inverse Distance", tr.intake=2014.5,Ylim=c(-10,-9),
+png(filename="~/Documents/fonts/fonts_replication/synth_plot_inverse50.png")
+path.plot(dataprep.res= dataprep.out, synth.res= synth.out, Xlab="Year", Ylab="Inverse Distance", tr.intake=2014.5,Ylim=c(-10.5,-10),
           Legend = c("Treated","Synthetic"))
 dev.off()
 
@@ -122,7 +118,8 @@ dev.off()
 average <- (synth.out)
 average$solution.w <- 1/(length(controls_id)) * rep(1, length(controls_id))
 
-png(filename="~/Documents/fonts_replication/plots/avg_plot_inverse50.png")
-path.plot(dataprep.res= dataprep.out, synth.res= average, Xlab="Year", Ylab="Inverse Distance", tr.intake=2014.5,Ylim=c(-10,-9),
+png(filename="~/Documents/fonts/fonts_replication/avg_plot_inverse50.png")
+path.plot(dataprep.res= dataprep.out, synth.res= average, Xlab="Year", Ylab="Inverse Distance", tr.intake=2014.5,Ylim=c(-10.5,-10),
           Legend = c("Treated","Average"))
 dev.off()
+
