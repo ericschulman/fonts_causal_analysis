@@ -1,4 +1,4 @@
-# Fonts causal anaylsis
+# Fonts causal analysis
 code to analyze font embeddings created by a neural net. This repo contains mostly jupyter notebooks and is organized as follows
 
 ## Data sources `data`
