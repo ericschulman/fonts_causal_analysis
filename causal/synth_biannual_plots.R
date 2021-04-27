@@ -73,8 +73,8 @@ calculate_treatment<-function(pre_treatment,post_treatment){
                          time.variable = "year_month",
                          treatment.identifier = fontfontid,
                          controls.identifier = controls_id,
-                         time.predictors.prior = relevant_years, #pre_treatment ##, #relevant_years, #, # #average w over all years 
-                         time.optimize.ssr = relevant_years, #pre_treatment, #relevant_years, #, #compute v weights over all years
+                         time.predictors.prior = pre_treatment, 
+                         time.optimize.ssr = pre_treatment,
                          unit.names.variable = "Foundry.Name",
                          time.plot = relevant_years)
   
@@ -109,7 +109,7 @@ print(synth.out$solution.w)
 
 ##------------ plot in levels (treated and synthetic) ---------
 png(filename="~/Documents/fonts/fonts_replication/synth_plot_inverse50.png")
-path.plot(dataprep.res= dataprep.out, synth.res= synth.out, Xlab="Year", Ylab="Inverse Distance", tr.intake=2014.5,Ylim=c(-10.5,-10),
+path.plot(dataprep.res= dataprep.out, synth.res= synth.out, Xlab="Year", Ylab="Inverse Distance", tr.intake=2014.5,Ylim=c(-10.9,-9.9),
           Legend = c("Treated","Synthetic"))
 dev.off()
 
@@ -119,7 +119,7 @@ average <- (synth.out)
 average$solution.w <- 1/(length(controls_id)) * rep(1, length(controls_id))
 
 png(filename="~/Documents/fonts/fonts_replication/avg_plot_inverse50.png")
-path.plot(dataprep.res= dataprep.out, synth.res= average, Xlab="Year", Ylab="Inverse Distance", tr.intake=2014.5,Ylim=c(-10.5,-10),
+path.plot(dataprep.res= dataprep.out, synth.res= average, Xlab="Year", Ylab="Inverse Distance", tr.intake=2014.5,Ylim=c(-10.9,-9.9),
           Legend = c("Treated","Average"))
 dev.off()
 

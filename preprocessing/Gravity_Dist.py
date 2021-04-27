@@ -10,10 +10,19 @@ import pandas as pd
 import time
 import numpy as np
 
+def get_avg_embeddings(data_path):
+    embeddings = pd.read_csv(data_path+'embeddings_full.csv')
+    embeddings = embeddings.dropna()
+    embeddings[['style','family']] = embeddings[['style','family']] .astype(int)
+    embeddings = embeddings.groupby(['style','crop_name'],as_index=False).mean() #this is here to fix a bug in 
+    #write embeddings...
+    embeddings_sty = embeddings.groupby(['style']).mean()
+    embeddings_sty.to_csv(data_path+"embeddings_avg.csv")
+
 
 def main(data_path):
     ######load data######
-    embeddings = pd.read_csv(data_path+ "embeddings_full.csv")
+    embeddings = pd.read_csv(data_path+ "embeddings_avg.csv")
     families = pd.read_csv(data_path+ "Families.csv")
 
     ## drop a row with nan data.
@@ -25,7 +34,7 @@ def main(data_path):
     #for each embeddings
     embedding_names = ['embedding {}'.format(i) for i in range(1,129)]
     gravity_dist = regular_fonts.copy()
-    gravity_dist.insert(1,"gravity_dist",np.nan)
+    gravity_dist.insert(0,"gravity_dist",np.nan)
 
     len_grvt = len(gravity_dist)
 
@@ -55,4 +64,5 @@ def main(data_path):
 
 if __name__ == "__main__":
     data_path = "../datasets/UT research project datasets/"
+    get_avg_embeddings(data_path)
     main(data_path)
