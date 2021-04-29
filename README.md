@@ -28,6 +28,6 @@ fonts_project
 
 ## References
 
-[Han, S., Schulman, E., Grauman, K., & Ramakrishnan, S. (2020). Shapes as product differentiation: Neural network embedding in the analysis of markets for fonts.](https://sites.google.com/site/universs01/mypdf/font_embedding.pdf)
+* [Han, S., Schulman, E., Grauman, K., & Ramakrishnan, S. (2020). Shapes as product differentiation: Neural network embedding in the analysis of markets for fonts.](https://sites.google.com/site/universs01/mypdf/font_embedding.pdf)
 
-[Chernozhukov, V., Wüthrich, K., & Zhu, Y. (2021). An exact and robust conformal inference method for counterfactual and synthetic controls. Journal of the American Statistical Association.](https://arxiv.org/abs/1712.09089)
+* [Chernozhukov, V., Wüthrich, K., & Zhu, Y. (2021). An exact and robust conformal inference method for counterfactual and synthetic controls. Journal of the American Statistical Association.](https://arxiv.org/abs/1712.09089)
