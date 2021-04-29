@@ -2,7 +2,7 @@
 
 This repo contains the codes to conduct causal analysis of merger using font embeddings created by fontnet in https://github.com/ericschulman/fontnet.
 
-## Data sources `data`
+## Data sources
 * The data for this anaylsis come from the `main_dataset` in a folder called `datasets`. We have written the code without global file paths assuming `datasets` is saved outside of this folder, i.e., 
 
 ```
