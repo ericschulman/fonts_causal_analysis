@@ -30,3 +30,8 @@ fonts_project
 * [Chernozhukov, V., Wüthrich, K., & Zhu, Y. (2021). An exact and robust conformal inference method for counterfactual and synthetic controls. Journal of the American Statistical Association.](https://arxiv.org/abs/1712.09089)
 
 * [Han, S., Schulman, E., Grauman, K., & Ramakrishnan, S. (2020). Shapes as product differentiation: Neural network embedding in the analysis of markets for fonts.](https://sites.google.com/site/universs01/mypdf/font_embedding.pdf)
+
+
+## License
+
+The codes and the dataset (separated shared) for this repository are protected by the Creative Commons non-commerical no-derivative license.
