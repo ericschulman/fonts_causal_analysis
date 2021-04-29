@@ -6,12 +6,18 @@ This repo contains the codes to conduct causal analysis of merger using font emb
 * The data for this anaylsis come from the `main_dataset` in a folder called `datasets`. We have written the code without global file paths assuming `datasets` is saved outside of this folder, i.e., 
 
 ```
-fonts_project    
+fonts_project
+└───fonts_causal_analysis
 └───datasets
 │   └─── raw_pangrams
+│   └─── crop7_test
+│   └─── crop7_train
 │   └─── main_dataset
 │   │   │ Style Sku Family.csv
-└───fonts_causal_analysis
+│   │   │ ...
+└───models
+└───logs
+└───fontnet
 ```
 
 ## Creating the panel
