@@ -27,7 +27,6 @@ fonts_project
 * The code is currently written to produce tables for the gravity distance measure. To use the distance from Averia, you can modify lines 60 and 71 with the appropriate variables i.e. change `gravity_dist` and `gravity_var` to `Distance.from.Mean` and `mean_var` from `fonts_panel_biannual_new.csv`.
 
 ## References
+* [Chernozhukov, V., Wüthrich, K., & Zhu, Y. (2021). An exact and robust conformal inference method for counterfactual and synthetic controls. Journal of the American Statistical Association.](https://arxiv.org/abs/1712.09089)
 
 * [Han, S., Schulman, E., Grauman, K., & Ramakrishnan, S. (2020). Shapes as product differentiation: Neural network embedding in the analysis of markets for fonts.](https://sites.google.com/site/universs01/mypdf/font_embedding.pdf)
-
-* [Chernozhukov, V., Wüthrich, K., & Zhu, Y. (2021). An exact and robust conformal inference method for counterfactual and synthetic controls. Journal of the American Statistical Association.](https://arxiv.org/abs/1712.09089)
