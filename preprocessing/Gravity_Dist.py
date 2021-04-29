@@ -63,6 +63,6 @@ def main(data_path):
 
 
 if __name__ == "__main__":
-    data_path = "../datasets/UT research project datasets/"
+    data_path = "../datasets/main_dataset/"
     get_avg_embeddings(data_path)
     main(data_path)

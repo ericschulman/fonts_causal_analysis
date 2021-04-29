@@ -325,7 +325,7 @@ def balance_panel(Main_Data_Supply):
 
 
 if __name__ == "__main__":
-    data_path = "../datasets/UT research project datasets/"
+    data_path = "../datasets/main_dataset/"
     Main_Data_Supply = generate_data(data_path)
     Main_Data_Supply.to_csv(data_path + "Main_Data_Supply_merged_bi.csv")
     Main_Data_Supply = pd.read_csv(data_path + "Main_Data_Supply_merged_bi.csv")

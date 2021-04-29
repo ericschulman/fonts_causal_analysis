@@ -3,7 +3,7 @@
 ###########################################################################################################
 
 rm(list = ls())
-setwd("~/Documents/fonts/fonts_replication/")
+setwd("~/Documents/fonts/fonts_causal_analysis/")
 
 ###########################################################################################################
 # Packages
@@ -26,7 +26,7 @@ library(Synth)
 source("causal/functions_conformal_012.R")
 
 ### load the data Data
-fonts_data<- read.csv("../datasets/UT research project datasets/fonts_panel_biannual_new.csv")
+fonts_data<- read.csv("../datasets/main_dataset/fonts_panel_biannual_new.csv")
 fonts_data$gravity_dist = -1*(log(-1*fonts_data$gravity_dist))
 fontfontid<-11
 
@@ -73,8 +73,8 @@ calculate_treatment<-function(pre_treatment,post_treatment){
                          time.variable = "year_month",
                          treatment.identifier = fontfontid,
                          controls.identifier = controls_id,
-                         time.predictors.prior = relevant_years, #pre_treatment ##, #relevant_years, #, # #average w over all years 
-                         time.optimize.ssr = relevant_years, #pre_treatment, #relevant_years, #, #compute v weights over all years
+                         time.predictors.prior = relevant_years, #need all years, not just pre-treatment for inference.
+                         time.optimize.ssr = relevant_years, 
                          unit.names.variable = "Foundry.Name",
                          time.plot = relevant_years)
   
@@ -120,7 +120,7 @@ print_treat<-function(results_info, index){
 }
 
 #####################################################################
-###################### pre treatment placebo, yearly ################
+###################### pre treatment placebo, yearly i.e. table 5 ###
 #####################################################################
 
 placebo_years<- c()
@@ -158,62 +158,19 @@ for (i in c(1:12)){
 results_info <-array(c(treatments,p_blocks,p_alls),
                      dim= c(length(treatments) ,3))
 
-#actually print results
-print_treat(results_info,c(1,5))
-print_treat(results_info,c(6,10))
-print_treat(results_info,c(11,12))
+#actually print results, correspond with table 5
+print_treat(results_info,c(1,6))
+print_treat(results_info,c(7,12))
 
-
-
-
-#####################################################################
-###################### pre treatment placebo, biannual ##############
-#####################################################################
-
-placebo_years<- seq(2012.,2014.,by=.5)
-p_blocks <- c()
-p_alls <- c()
-treatments <- c()
-
-for (i in c(1:5)){
-  pre_treatment <- c( seq(2002.,2011.5,by=.5), c(placebo_years[1:i-1]) )
-  post_treatment <- c(placebo_years[i])
-  print(pre_treatment)
-  print(post_treatment)
-  
-  treatment_result <- calculate_treatment(pre_treatment,post_treatment)
-  
-  
-  #save results
-  treatment <-treatment_result[[1]]
-  p_block <-treatment_result[[2]]
-  p_all  <-treatment_result[[3]]
-  synth.out <- treatment_result[[4]]
-  
-  
-  #save the results
-  treatments <- append(treatments,treatment)
-  p_blocks <- append(p_blocks,p_block)
-  p_alls <- append(p_alls,p_all)
-}
-
-
-results_info <-array(c(treatments,p_blocks,p_alls),
-                     dim= c(length(treatments) ,3))
-
-#actually print results
-print_treat(results_info,c(1,5))
 
 #############################################################
-########## print results ####################################
+########## treatment effect i.e. table 4 ####################
 #############################################################
 
 
 pre_treatment <- seq(2002,2014.,by=.5)
 post_treatment <- seq(2014.5,2017.5,by=.5)
-treatment_durations <- c( seq(2014.5,2017.5,by=.5),
-                          list( seq(2015.,2015.5,by=.5)), list(seq(2016.,2016.5,by=.5)),  list(seq(2017.,2017.5,by=.5)),
-                          list( seq(2014.5,2015.5,by=.5), seq(2014.5,2016.5,by=.5), seq(2014.5,2017.5,by=.5)) )
+treatment_durations <-  c(list( seq(2014.5,2015.5,by=.5), seq(2014.5,2016.5,by=.5), seq(2014.5,2017.5,by=.5)) )
 
 p_blocks <- c()
 p_alls <- c()
@@ -239,12 +196,9 @@ for (post_treatment in treatment_durations) {
 results_info <-array(c(treatments,p_blocks,p_alls),
                      dim= c(length(treatments) ,3))
 
-#actually print results
-print_treat(results_info,c(1,7))
-print_treat(results_info,c(8,14))
-print_treat(results_info,c(15-7,17-7))
-print_treat(results_info,c(18-7,20-7))
 
+#actually print results corresponds to table 4 in the draft.
+print_treat(results_info,c(1,3))
 
 
 

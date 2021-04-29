@@ -3,7 +3,8 @@
 ###########################################################################################################
 
 rm(list = ls())
-setwd("~/Documents/fonts/fonts_replication/")
+setwd("~/Documents/fonts/fonts_causal_analysis/")
+
 
 ###########################################################################################################
 # Packages
@@ -26,7 +27,7 @@ library(Synth)
 source("causal/functions_conformal_012.R")
 
 ### load the data Data
-fonts_data<- read.csv("../datasets/UT research project datasets/fonts_panel_biannual_new.csv")
+fonts_data<- read.csv("../datasets/main_dataset/fonts_panel_biannual_new.csv")
 fonts_data$gravity_dist = -1*(log(-1*fonts_data$gravity_dist))
 fontfontid<-11
 
@@ -108,7 +109,7 @@ synth.out <- treatment_result[[4]]
 print(synth.out$solution.w)
 
 ##------------ plot in levels (treated and synthetic) ---------
-png(filename="~/Documents/fonts/fonts_replication/synth_plot_inverse50.png")
+png(filename="~/Documents/fonts/fonts_causal_analysis/synth_plot_inverse50.png")
 path.plot(dataprep.res= dataprep.out, synth.res= synth.out, Xlab="Year", Ylab="Inverse Distance", tr.intake=2014.5,Ylim=c(-10.9,-9.9),
           Legend = c("Treated","Synthetic"))
 dev.off()
@@ -118,7 +119,7 @@ dev.off()
 average <- (synth.out)
 average$solution.w <- 1/(length(controls_id)) * rep(1, length(controls_id))
 
-png(filename="~/Documents/fonts/fonts_replication/avg_plot_inverse50.png")
+png(filename="~/Documents/fonts/fonts_causal_analysis/avg_plot_inverse50.png")
 path.plot(dataprep.res= dataprep.out, synth.res= average, Xlab="Year", Ylab="Inverse Distance", tr.intake=2014.5,Ylim=c(-10.9,-9.9),
           Legend = c("Treated","Average"))
 dev.off()
