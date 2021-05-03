@@ -40,4 +40,4 @@ fonts_project
 
 ## License
 
-The codes and the dataset (separated shared) for this repository are protected by the Creative Commons non-commerical no-derivative license.
+The codes and the dataset (separately shared) for this repository are protected by the Creative Commons non-commerical no-derivative license.
