@@ -1,6 +1,6 @@
 # Causal Analysis of Merger using Font Embeddings
 
-This repo contains the codes to conduct causal analysis of merger using font embeddings created by fontnet in https://github.com/ericschulman/fontnet.
+This repo contains the codes to conduct causal analysis of merger using font embeddings created by fontnet in https://github.com/ericschulman/fontnet. Refer to Han et al. (2020) for details of the merger analysis.
 
 ## Data sources
 * The data for this anaylsis come from the `main_dataset` in a folder called `datasets`. We have written the code without global file paths assuming `datasets` is saved outside of this folder, i.e., 
